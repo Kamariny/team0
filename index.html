@@ -81,5 +81,79 @@
         <p><strong>Username:</strong> Kamariny</p>
         <p><strong>Password:</strong> Eldo..!1</p>
     </div>
+
+    <div class="steps">
+        <ol>
+            <li> Copy the code of the jumping Ball to you index.html file.
+                    <code>
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Jumping Ball&lt;/title&gt;
+    &lt;style&gt;
+        body {
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #282c34;
+        }
+        canvas {
+            background: white;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;canvas id="gameCanvas"&gt;&lt;/canvas&gt;
+    &lt;script&gt;
+        const canvas = document.getElementById("gameCanvas");
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let ball = {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            radius: 20,
+            dy: 0,
+            gravity: 0.5,
+            bounce: -10
+        };
+
+        function update() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ball.dy += ball.gravity;
+            ball.y += ball.dy;
+            
+            if (ball.y + ball.radius > canvas.height) {
+                ball.y = canvas.height - ball.radius;
+                ball.dy = ball.bounce;
+            }
+            
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.radius, 0, Math.PI * 2);
+            ctx.fillStyle = "red";
+            ctx.fill();
+            ctx.closePath();
+            
+            requestAnimationFrame(update);
+        }
+
+        window.addEventListener("click", () => {
+            ball.dy = ball.bounce;
+        });
+
+        update();
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+    </code>
+                </li>
+        </ol>
+    </div>
 </body>
 </html>
